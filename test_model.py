@@ -56,6 +56,20 @@ def test_image_shape_on_prediction(model):
     prediction = predict_result(processed_img)
     assert isinstance(prediction, (int, np.integer)), "The prediction should be an integer"
 
+def test_predict_result_accurate(model):
+    """Test the predict_result function and check if it is accurate."""
+    img_path = "test_images/4/Sign 4 (92).jpeg"  # Ensure the path is correct
+    processed_img = preprocess_img(img_path)
+
+    # Make a prediction
+    prediction = predict_result(processed_img)
+
+    # Print the prediction for debugging
+    print(f"Prediction: {prediction} (Type: {type(prediction)})")
+
+    # Check that the prediction is an integer (convert if necessary)
+    assert prediction == 4; "Prediction should be an integer class index"
+
 def test_model_predictions_consistency(model):
     """Test that predictions for the same input are consistent."""
     img_path = "test_images/7/Sign 7 (54).jpeg"
