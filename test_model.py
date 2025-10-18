@@ -1,4 +1,4 @@
-import os
+import os, io
 import pytest
 import numpy as np
 from keras.models import load_model
@@ -112,4 +112,32 @@ def test_main_route_renders_index_template(client):
     assert b"Hand Sign Digit Language Detection" in response.data, \
     "Expected page title not found in index.html response."
 
+def test_prediction_route_renders_result_template(client):
+    """
+    Test Case: Validate that the /prediction route renders the result.html template.
 
+    This test simulates uploading a valid image file to the prediction endpoint,
+    verifies the response status code, and checks that the response contains
+    content from result.html (e.g., the prediction or error message).
+    """
+
+    # Set file path for image to load from
+    img_path = "test_images/2/Sign 2 (97).jpeg"
+    
+    # Open the image file in binary mode to simulate web based file upload
+    with open(img_path, "rb") as img:
+        response = client.post(
+        "/prediction",
+        content_type="multipart/form-data",
+        data={"file": (img, "Sign 2 (97).jpeg")}
+    )
+
+    # Create a dummy file to simulate image upload
+    dummy_image = (io.BytesIO(b"fake image data"), "test_image.png")
+
+    # Verify that the route executed successfully
+    assert response.status_code == 200, "Expected status code 200 for the prediction route."
+
+    # Verify that the result.html template was rendered by checking for expected content
+    assert b"Prediction" in response.data and b"result" in response.data, \
+        "Expected content from result.html not found in response."
