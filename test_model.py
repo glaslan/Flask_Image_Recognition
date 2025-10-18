@@ -3,7 +3,7 @@ import pytest
 import numpy as np
 from keras.models import load_model
 from model import preprocess_img, predict_result  # Adjust based on your structure
-
+from app import app
 # Load the model before tests run
 @pytest.fixture(scope="module")
 def model():
@@ -80,3 +80,36 @@ def test_model_predictions_consistency(model):
 
     # Check that all predictions are the same
     assert all(p == predictions[0] for p in predictions), "Predictions for the same input should be consistent"
+
+
+# --- Test Flask main route (index page) ---
+@pytest.fixture
+def client():
+    """
+    Fixture for the Flask test client.
+    Lighweight Test version of the Flask application
+    Simulates HTTP rquests 
+    """
+
+    #Creates a temp test client 
+    with app.test_client() as client:
+        #Returns the test client to the test function 
+        yield client
+
+
+def test_main_route_renders_index_template(client):
+    """
+    Test Case: Validate that the main route renders the index.html template.
+    
+    """
+    response = client.get("/")
+
+    # Verify that the route executed successfully
+    assert response.status_code == 200, "Expected status code 200 for the main route."
+
+    # Verify that the rendered page contains the expected title text.
+    # This ensures the correct template (index.html) was rendered successfully.
+    assert b"Hand Sign Digit Language Detection" in response.data, \
+    "Expected page title not found in index.html response."
+
+
