@@ -1,13 +1,13 @@
 name: CI Pipeline
 
-on:   
+on:
 
   push:
     branches:
       - main  # Run on pushes made into the main branch
 
   pull_request:
-  
+
     branches:
       - main  # Run on pull requests targeting the main branch
 

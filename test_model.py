@@ -88,19 +88,19 @@ def client():
     """
     Fixture for the Flask test client.
     Lighweight Test version of the Flask application
-    Simulates HTTP rquests 
+    Simulates HTTP rquests
     """
 
-    #Creates a temp test client 
+    #Creates a temp test client
     with app.test_client() as client:
-        #Returns the test client to the test function 
+        #Returns the test client to the test function
         yield client
 
 
 def test_main_route_renders_index_template(client):
     """
     Test Case: Validate that the main route renders the index.html template.
-    
+
     """
     response = client.get("/")
 
@@ -123,7 +123,7 @@ def test_prediction_route_renders_result_template(client):
 
     # Set file path for image to load from
     img_path = "test_images/2/Sign 2 (97).jpeg"
-    
+
     # Open the image file in binary mode to simulate web based file upload
     with open(img_path, "rb") as img:
         response = client.post(
