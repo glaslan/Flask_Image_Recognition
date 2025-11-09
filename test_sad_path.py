@@ -23,11 +23,11 @@ def test_prediction_no_file_uploaded(client):
     - Expected Result: Should return 200 with an error message in the rendered page.
     """
     response = client.post(
-        "/prediction", 
-        data={}, 
+        "/prediction",
+        data={},
         content_type="multipart/form-data"
     )
-    
+
     assert response.status_code == 200
     assert b"Prediction" in response.data
     assert b"File cannot be processed" in response.data
