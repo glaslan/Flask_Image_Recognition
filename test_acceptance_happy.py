@@ -44,7 +44,7 @@ def test_acceptance_successful_upload(client):
 def test_acceptance_valid_large_image(client):
     """
     Test Case: Upload of a Valid Large Image File
-    - Purpose: Check if the system accepts large but valid 
+    - Purpose: Check if the system accepts large but valid
         image files without errors and still provides predictions.
     - Method:
         - Create a mock large image file by repeating mock image data multiple times.
