@@ -1,7 +1,22 @@
-# test_integration_happy.py
+"""
+This module contains integration tests for happy path scenarios.
+"""
 
 from io import BytesIO
 import pytest
+
+
+@pytest.fixture
+def client():
+    """
+    Fixture for the Flask test client.
+    - Purpose: Set up a test client for making requests to the Flask app during testing.
+    - Usage: Provides a `client` object to use for HTTP request simulations.
+    """
+    from app import app
+    with app.test_client() as test_client:
+        yield test_client
+
 
 def test_successful_prediction(client):
     """Test the successful image upload and prediction."""

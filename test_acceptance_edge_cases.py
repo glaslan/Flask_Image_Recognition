@@ -1,8 +1,22 @@
-# test_acceptance_edge_cases.py
+'''
+This is the acceptance test suite that tests for edge cases.
+'''
 
 from io import BytesIO
 import pytest
-from threading import Thread
+from app import app
+
+
+@pytest.fixture
+def client():
+    """
+    Fixture for the Flask test client.
+    - Purpose: Set up a test client for making requests to the Flask app during testing.
+    - Usage: Provides a `client` object to use for HTTP request simulations.
+    """
+    with app.test_client() as test_client:
+        yield test_client
+
 
 # Helper function for concurrent image uploads
 def upload_image(client, img_data):

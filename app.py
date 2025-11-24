@@ -36,14 +36,11 @@ def predict_image_file():
         str: Rendered HTML template with prediction results or error message.
     """
     try:
-        if request.method == 'POST':
-            img = preprocess_img(request.files['file'].stream)
-            pred = predict_result(img)
-            return render_template("result.html", predictions=str(pred))
-
-    except Exception as e:
-        error = "File cannot be processed."
-        return render_template("result.html", err=error)
+        img = preprocess_img(request.files['file'].stream)
+        pred = predict_result(img)
+        return render_template("result.html", predictions=str(pred))
+    except (KeyError, ValueError, IOError) as e:
+        return render_template("result.html", err=e)
 
 
 # Driver code

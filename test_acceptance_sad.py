@@ -1,7 +1,9 @@
-# test_acceptance_sad.py
+'''
+This is the acceptance test suite that tests for sad cases.
+'''
 
 import pytest
-from app import app
+
 
 @pytest.fixture
 def client():
@@ -10,8 +12,10 @@ def client():
     - Purpose: Set up a test client for making requests to the Flask app during testing.
     - Usage: Provides a `client` object to use for HTTP request simulations.
     """
-    with app.test_client() as client:
-        yield client
+    from app import app
+    with app.test_client() as test_client:
+        yield test_client
+
 
 def test_acceptance_missing_file(client):
     """

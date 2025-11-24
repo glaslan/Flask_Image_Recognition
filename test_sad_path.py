@@ -1,8 +1,11 @@
-# test_sad_path.py
+"""
+This module contains unit tests for sad path scenarios.
+"""
 
-import pytest
 from io import BytesIO
+import pytest
 from app import app
+
 
 @pytest.fixture
 def client():
@@ -11,8 +14,8 @@ def client():
     - Purpose: Set up a test client for making requests to the Flask app during testing.
     - Usage: Provides a `client` object to use for HTTP request simulations.
     """
-    with app.test_client() as client:
-        yield client
+    with app.test_client() as test_client:
+        yield test_client
 
 
 def test_prediction_no_file_uploaded(client):
@@ -29,8 +32,8 @@ def test_prediction_no_file_uploaded(client):
     )
 
     assert response.status_code == 200
-    assert b"Prediction" in response.data
-    assert b"File cannot be processed" in response.data
+    assert "Prediction" in str(response.data), "Prediction page is returned"
+    assert "server could not understand." in str(response.data)
 
 
 def test_prediction_invalid_file_type(client):
@@ -47,5 +50,5 @@ def test_prediction_invalid_file_type(client):
         content_type="multipart/form-data"
     )
     assert response.status_code == 200
-    assert b"Prediction" in response.data
-    assert b"File cannot be processed" in response.data
+    assert "Prediction" in str(response.data), "Prediction page is returned"
+    assert b"cannot identify image file" in response.data

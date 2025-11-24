@@ -1,14 +1,16 @@
-# test_integration_sad.py
+"""
+This module contains integration tests for sad path scenarios.
+"""
 
 import pytest
-from app import app
-from io import BytesIO
+
 
 @pytest.fixture
 def client():
     """Fixture for the Flask test client."""
-    with app.test_client() as client:
-        yield client
+    from app import app
+    with app.test_client() as test_client:
+        yield test_client
 
 def test_missing_file(client):
     """Test the prediction route with a missing file."""
