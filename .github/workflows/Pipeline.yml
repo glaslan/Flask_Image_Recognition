@@ -37,7 +37,7 @@ jobs:
       - name: Run pylint
         run: |
           pylint $(git ls-files '*.py') #Run Pylint on necessary code (could change to include specified files)
-    
+
   unit-Tests:
     runs-on: ubuntu-latest
     needs: lint-and-test
@@ -45,7 +45,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
+
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -61,7 +61,7 @@ jobs:
       - name: Run unit tests
         run: |
           pytest test_model.py
-  
+
   happy-sad-path-Tests:
     runs-on: ubuntu-latest
     needs: unit-Tests
@@ -69,7 +69,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
+
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -86,7 +86,7 @@ jobs:
         run: |
           pytest test_happy_path.py
           pytest test_sad_path.py
-  
+
   acceptance-Tests:
     runs-on: ubuntu-latest
     needs: happy-sad-path-Tests
@@ -94,7 +94,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
+
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -112,4 +112,3 @@ jobs:
           pytest test_acceptance_sad.py
           pytest test_acceptance_happy.py
           pytest test_acceptance_edge.py
-  
