@@ -11,9 +11,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Set up python 3.7
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: 3.7
     - name: Install dependencies
@@ -30,7 +30,7 @@ jobs:
         coverage report
         coverage html
     - name: Archive code coverage html report
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: code-coverage-report
         path: src/htmlcov
@@ -40,7 +40,7 @@ jobs:
         python -m pip install --user --upgrade build
         python -m build
     - name: Archive package
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: image-recognizer
         path: src/dist
