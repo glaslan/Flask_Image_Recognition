@@ -111,4 +111,4 @@ jobs:
         run: |
           pytest test_acceptance_sad.py
           pytest test_acceptance_happy.py
-          pytest test_acceptance_edge.py
+          pytest test_acceptance_edge_cases.py
