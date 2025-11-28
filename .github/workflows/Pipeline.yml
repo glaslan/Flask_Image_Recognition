@@ -4,12 +4,12 @@ on:
 
   push:
     branches:
-      - test  # Run on pushes made into the main branch
+      - main  # Run on pushes made into the main branch
 
   pull_request:
 
     branches:
-      - test  # Run on pull requests targeting the main branch
+      - main  # Run on pull requests targeting the main branch
 
 jobs:
   lint-and-test:
