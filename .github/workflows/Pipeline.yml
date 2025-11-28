@@ -60,7 +60,7 @@ jobs:
 
       - name: Run unit tests
         run: |
-          pytest test_model.py
+          exit 1
 
   happy-sad-path-Tests:
     runs-on: ubuntu-latest
