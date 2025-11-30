@@ -54,13 +54,8 @@ def test_upload_wrong_filetype_textfile(client):
         content_type="multipart/form-data"
     )
 
-    data = {
-
-        'file': (open('invalid_file.txt', 'rb'), 'invalid_file.txt')
-    }
-
     # 1. Ensure the response status code is 200, indicating the request was processed.
-    assert response.status_code != 200
+    assert response.status_code == 200
 
     # 2. Check for an error message in the response data.
     # Modify the message check if your application uses a different error response text.
