@@ -36,3 +36,31 @@ def test_acceptance_missing_file(client):
     # 2. Check for a meaningful error message in the response data.
     #    Modify the message check if your application uses a different error response text.
     assert b"server could not understand." in response.data  # Expected error message
+
+def test_upload_wrong_filetype_textfile(client):
+    """
+    GIVEN the Flask_Image_Recognition web application is running,
+    WHEN the user uploads a text file and hits 'submit'
+    THEN, the response should inform the user of an error
+    """
+    # Simulating a text file
+    text_file = BytesIO(b"fake_large_image_data" * 1000) 
+    text_file.name = "invalid_file.txt"
+
+    response = client.post(
+        "/prediction",
+        data={"file": (text_file, text_file.name)},
+        content_type="multipart/form-data"
+    )
+
+    data = {
+        
+        'file': (open('invalid_file.txt', 'rb'), 'invalid_file.txt')
+    }
+
+    # 1. Ensure the response status code is 200, indicating the request was processed.
+    assert response.status_code != 200
+
+    # 2. Check for a meaningful error message in the response data.
+    # Modify the message check if your application uses a different error response text.
+    assert b"please upload an image" in response.data  # Expected error message

@@ -85,3 +85,6 @@ def test_acceptance_valid_image_size_upload(client):
 
     assert response.status_code == 200
     assert b"Prediction" in response.data
+
+
+# Given a user wishes to receive a number count from the given
