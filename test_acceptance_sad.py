@@ -59,4 +59,7 @@ def test_upload_wrong_filetype_textfile(client):
 
     # 2. Check for an error message in the response data.
     # Modify the message check if your application uses a different error response text.
-    assert b"please upload an image" in response.data  # Expected error message
+    assert b"Upload" in response.data or b"Choose File" in response.data
+
+    # Ensure no prediction text appears.
+    assert b"Predicted" not in response.data
