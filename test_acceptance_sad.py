@@ -39,11 +39,6 @@ def test_acceptance_missing_file(client):
     #    Modify the message check if your application uses a different error response text.
     assert b"server could not understand." in response.data  # Expected error message
 
-def test_non_existent_file(client):
-    """
-    GIVEN the Flask_Image Recognition web application is running,
-    WHEN the user uploads a non_existen file, or the system
-    """
 def test_upload_wrong_filetype_textfile(client):
     """
     GIVEN the Flask_Image_Recognition web application is running,
