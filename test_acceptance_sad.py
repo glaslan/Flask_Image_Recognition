@@ -45,7 +45,7 @@ def test_upload_wrong_filetype_textfile(client):
     THEN, the response should inform the user of an error
     """
     # Simulating a text file
-    text_file = BytesIO(b"fake_large_image_data" * 1000) 
+    text_file = BytesIO(b"fake_large_image_data" * 1000)
     text_file.name = "invalid_file.txt"
 
     response = client.post(
@@ -55,7 +55,7 @@ def test_upload_wrong_filetype_textfile(client):
     )
 
     data = {
-        
+
         'file': (open('invalid_file.txt', 'rb'), 'invalid_file.txt')
     }
 
