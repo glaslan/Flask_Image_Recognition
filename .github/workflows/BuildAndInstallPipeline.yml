@@ -40,7 +40,7 @@ jobs:
       with:
         name: image-recognizer
         path: ./dist
-        
+
   install-artifact:
     name: Installing Package
     runs-on: ubuntu-latest
