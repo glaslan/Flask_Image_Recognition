@@ -2,6 +2,7 @@
 This is the acceptance test suite that tests for sad cases.
 '''
 
+from io import BytesIO
 import pytest
 
 
