@@ -57,7 +57,7 @@ jobs:
       - name: Download Artifact
         uses: actions/download-artifact@v4
         with:
-          name: dist
+          name: image-recognizer
           path: dist
       - name: Install package
         run: |
