@@ -1,4 +1,4 @@
-name: Flask Image Recognition build
+name: Flask Image Recognition build and install
 
 on:
   workflow_run:
@@ -40,3 +40,26 @@ jobs:
       with:
         name: image-recognizer
         path: ./dist
+        
+  install-artifact:
+    name: Installing Package
+    runs-on: ubuntu-latest
+    needs: build
+    strategy:
+      matrix:
+        python-version: ["3.9"]
+
+    steps:
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+      - name: Install package
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install dist/*.whl
