@@ -1,6 +1,11 @@
+name: Locust Load Testing
+
 on:
-  push:
-  pull_request:
+  workflow_run:
+    workflows: [Flask Image Recognition build and install]
+    types:
+      - completed
+
 
 jobs:
 
